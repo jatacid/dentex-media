@@ -4,7 +4,7 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://www.dentexmedia.com.au
 */
 
@@ -13,14 +13,10 @@ Author URI: http://www.dentexmedia.com.au
 //Updater Class
 add_action( 'init', 'github_plugin_updater_test_init' );
 function github_plugin_updater_test_init() {
-
 	include_once 'updater.php';
-
 	define( 'WP_GITHUB_FORCE_UPDATE', true );
-
 	if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
 $login = 'jatacid/dentex-media';
-
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
 			'proper_folder_name' => 'dentex-media',
@@ -34,11 +30,8 @@ $login = 'jatacid/dentex-media';
 			'readme' => 'README.md',
 			'access_token' => 'ddeb3d9457870d518b565043ec8003ba7eb235eb',
 		);
-
 		new WP_GitHub_Updater( $config );
-
 	}
-
 }
 
 
