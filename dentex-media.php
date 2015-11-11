@@ -4,19 +4,28 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://www.dentexmedia.com.au
 */
 
 
 
 //Updater Class
-add_action( 'init', 'github_plugin_updater_test_init' );
+if (!function_exists( 'github_plugin_updater_test_init' )) {
 function github_plugin_updater_test_init() {
-	include_once 'updater.php';
-	define( 'WP_GITHUB_FORCE_UPDATE', true );
+// ... proceed to declare your function
+include_once 'updater.php';
+define( 'WP_GITHUB_FORCE_UPDATE', true );
+}
+}
+add_action( 'init', 'github_plugin_updater_test_init' );
+
+
+
+function dentex_media_updater() {
 	if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
 $login = 'jatacid/dentex-media';
+
 		$config = array(
 			'slug' => plugin_basename( __FILE__ ),
 			'proper_folder_name' => 'dentex-media',
@@ -25,14 +34,18 @@ $login = 'jatacid/dentex-media';
 			'github_url' => 'https://github.com/'. $login,
 			'zip_url' => 'https://github.com/'. $login .'/archive/master.zip',
 			'sslverify' => true,
-			'requires' => '4.2',
-			'tested' => '4.3',
+			'requires' => '3.0',
+			'tested' => '3.3',
 			'readme' => 'README.md',
-			'access_token' => 'ddeb3d9457870d518b565043ec8003ba7eb235eb',
+			'access_token' => '',
 		);
 		new WP_GitHub_Updater( $config );
-	}
 }
+}
+add_action( 'init', 'dentex_media_updater' );
+
+
+
 
 
 
