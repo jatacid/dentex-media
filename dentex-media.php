@@ -37,7 +37,7 @@ $login = 'jatacid/dentex-media';
 			'requires' => '3.0',
 			'tested' => '3.3',
 			'readme' => 'README.md',
-			'access_token' => '955afb6b81b4d8f5deb29d41a40eb7708d49fa8b',
+			'access_token' => '',
 		);
 		new WP_GitHub_Updater( $config );
 }
