@@ -38,15 +38,6 @@ add_action('wp_dashboard_setup', 'dm_add_dashboard_widget' );
 // remove upgrade notification
 remove_action( 'admin_notices', 'update_nag', 3 );
 
-// Remove detailed login errors
-if (!function_exists('login_error_message')) {
-  add_filter('login_errors','login_error_message');
-  function login_error_message($error){
-    $error = "<strong>ERROR:</strong> Your login details are incorrect.";
-    return $error;
-  }
-}
-
 
 function new_login_styles() {
   echo '<style type="text/css">
