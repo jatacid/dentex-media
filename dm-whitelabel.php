@@ -66,7 +66,6 @@ function my_admin_bar_edit() {
   // remove icons from the default menu bar
   global $wp_admin_bar;
  $wp_admin_bar->remove_node('comments');
-    $wp_admin_bar->remove_node('edit');
   $wp_admin_bar->remove_node('updates');
     $wp_admin_bar->remove_node('wpseo-menu');
   $wp_admin_bar->remove_node('itsec');
@@ -75,22 +74,6 @@ function my_admin_bar_edit() {
     $wp_admin_bar->remove_node('wp-logo');
 //    $wp_admin_bar->remove_node('new-content');
     $wp_admin_bar->remove_node('revslider');
-
-if(current_user_can('administrator')) //administrator
-{
-  //display a 'custom css' hotlink for the admin
-  $url = admin_url( 'customize.php?autofocus&# 91;control&# 93;=fl-css-code' );
-  $args = array(
-    'id' => 'css-quick-access',
-    'title' => 'Custom CSS', 
-    'href' => $url,
-    'meta' => array(
-      'class' => 'css-quick-access', 
-      'title' => 'Custom CSS'
-      )
-  );
-  $wp_admin_bar->add_node($args);
-  }
 }
 add_action( 'wp_before_admin_bar_render', 'my_admin_bar_edit', 99999);
 

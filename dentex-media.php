@@ -2,11 +2,16 @@
 /*
 Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
-Description: A plugin for setting up wordpress environment to ideal conditions
+Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 1.5
+Version: 1.6
 Author URI: http://www.dentexmedia.com.au
 */
+
+
+//checks for BB-theme
+$theme = wp_get_theme();
+if ('bb-theme' == $theme->name || 'Beaver Builder Theme' == $theme->parent_theme) {
 
 
 
@@ -86,3 +91,13 @@ require_once 'dm-shortcodes.php';
 
 // Load white-labelling
 require_once 'dm-whitelabel.php';
+
+
+
+
+
+
+}
+
+
+
