@@ -70,19 +70,22 @@ function my_admin_bar_edit() {
     $wp_admin_bar->remove_node('wpseo-menu');
   $wp_admin_bar->remove_node('itsec');
     $wp_admin_bar->remove_node('search');
-
+    $wp_admin_bar->remove_node('edit');
     $wp_admin_bar->remove_node('wp-logo');
 //    $wp_admin_bar->remove_node('new-content');
     $wp_admin_bar->remove_node('revslider');
-}
+    $wp_admin_bar->remove_node('fl-builder-frontend-edit-link');
+  }
 add_action( 'wp_before_admin_bar_render', 'my_admin_bar_edit', 99999);
 
 
 
 
 //Add custom CSS shortcut to adminbar
-add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 999 );
+add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 998 );
 function toolbar_css_shortcut( $wp_admin_bar ) {
+ 
+if (current_user_can( 'administrator')){ 
   $args = array(
     'id'    => 'css_shortcut',
     'title' => 'Shortcut to CSS',
@@ -90,7 +93,92 @@ function toolbar_css_shortcut( $wp_admin_bar ) {
     'meta'  => array( 'class' => 'my-toolbar-page' )
   );
   $wp_admin_bar->add_node( $args );
+
+//add submenu to site-name link for quick access to plugins
+ $args = array(
+    'id'    => 'pluginshortcut',
+    'title' => 'Plugins',
+    'href'  => admin_url( 'plugins.php' ),
+    'parent' => 'site-name'
+  );
+  $wp_admin_bar->add_node( $args );
 }
+}
+
+
+//Add custom bbedit-pages shortcut to adminbar
+add_action( 'admin_bar_menu', 'edit_bb_pg', 999 );
+function edit_bb_pg( $wp_admin_bar ) {
+
+if (current_user_can( 'administrator')){ 
+
+
+$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$pos = strpos($ur, 'admin');
+if ($pos === false){
+  $ur = $ur . '?fl_builder';
+}else{
+  $ur = '';
+}
+
+
+  $args = array(
+    'id'    => 'edit_bb_pg',
+    'title' => 'Edit Page in BB',
+    'href'  =>  $ur,
+    'meta'  => array( 'class' => 'edit_bb_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+
+ $pages = get_pages(); 
+  foreach ( $pages as $page ) {
+  $link = get_page_link( $page->ID );
+  $title = $page->post_title;
+  $args = array(
+    'id'    => $title . 'bbpg',
+    'title' => $title,
+    'href'  => $link . '?fl_builder',
+    'parent' => 'edit_bb_pg',
+    'meta'  => array( 'class' => 'edit_bb_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+  }
+}
+}
+
+
+//Add custom wp edit-pages shortcut to adminbar
+add_action( 'admin_bar_menu', 'edit_wp_pg', 997 );
+function edit_wp_pg( $wp_admin_bar ) {
+ 
+if (current_user_can( 'administrator')){ 
+  $args = array(
+    'id'    => 'edit_wp_pg',
+    'title' => 'Edit Pages in WP',
+    'href'  => admin_url( '/edit.php?post_type=page'), 
+    'meta'  => array( 'class' => 'edit_wp_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+
+ $pages = get_pages(); 
+  foreach ( $pages as $page ) {
+  $link = $page->ID;
+  $title = $page->post_title;
+  $args = array(
+    'id'    => $title . 'wppg',
+    'title' => $title,
+    'href'  => admin_url( '/post.php?post=' . $link . '&action=edit'),
+    'parent' => 'edit_wp_pg',
+    'meta'  => array( 'class' => 'edit_wp_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+  }
+}
+}
+
+
+
+
 
 
 function filter_admin_menues() {
