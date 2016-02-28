@@ -28,25 +28,6 @@ function dentex_register_theme_customizer( $wp_customize ) {
 add_action( 'customize_register', 'dentex_register_theme_customizer' );
 
 
-// CSS
-//     echo '<style type="text/css">' . $settings[ 'dentex_media_css' ] . '</style>' . "\n";
-//    add_action('fl_head', 'dent_media_css');
-
-
-function dentex_fl_header_enabled( $enabled ) {
-$settings =  FLCustomizer::get_mods();
-$template = $settings['dentex_header_template'];
-if ($template !== '' ){
-       $enabled = false;
-       return $enabled;
-   }
-   else $enabled = true;
-   return $enabled;
-}
-add_filter( 'fl_header_enabled', 'dentex_fl_header_enabled' );
-
-
-
 
 
 

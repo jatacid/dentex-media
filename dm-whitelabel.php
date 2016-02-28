@@ -66,7 +66,7 @@ function my_admin_bar_edit() {
   // remove icons from the default menu bar
   global $wp_admin_bar;
  $wp_admin_bar->remove_node('comments');
-  $wp_admin_bar->remove_node('updates');
+//  $wp_admin_bar->remove_node('updates');
     $wp_admin_bar->remove_node('wpseo-menu');
   $wp_admin_bar->remove_node('itsec');
     $wp_admin_bar->remove_node('search');
