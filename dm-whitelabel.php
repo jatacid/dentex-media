@@ -130,18 +130,32 @@ if ($pos === false){
   );
   $wp_admin_bar->add_node( $args );
 
- $pages = get_pages(); 
+ $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
   foreach ( $pages as $page ) {
   $link = get_page_link( $page->ID );
   $title = $page->post_title;
   $args = array(
-    'id'    => $title . 'bbpg',
+    'id'    => $page->ID . 'bbpg',
     'title' => $title,
     'href'  => $link . '?fl_builder',
     'parent' => 'edit_bb_pg',
     'meta'  => array( 'class' => 'edit_bb_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
+  
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
+         foreach( $subpages as $subpage ) {    
+            $link = get_page_link( $subpage->ID );
+            $title = $subpage->post_title;
+            $args = array(
+                'id'    => $subpage->ID. 'bbpg',
+                'title' => $title,
+                'href'  => $link . '?fl_builder',
+                'parent' => $page->ID . 'bbpg',
+                'meta'  => array( 'class' => 'edit_bb_pg_group' )
+              );
+              $wp_admin_bar->add_node( $args );
+         }
   }
 }
 }
@@ -160,18 +174,33 @@ if (current_user_can( 'administrator')){
   );
   $wp_admin_bar->add_node( $args );
 
- $pages = get_pages(); 
+  $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
   foreach ( $pages as $page ) {
   $link = $page->ID;
   $title = $page->post_title;
   $args = array(
-    'id'    => $title . 'wppg',
+    'id'    => $page->ID . 'wppg',
     'title' => $title,
     'href'  => admin_url( '/post.php?post=' . $link . '&action=edit'),
     'parent' => 'edit_wp_pg',
     'meta'  => array( 'class' => 'edit_wp_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
+  
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
+         foreach( $subpages as $subpage ) {    
+            $link = $subpage->ID;
+            $title = $subpage->post_title;
+            $args = array(
+                'id'    => $subpage->ID. 'wppg',
+                'title' => $title,
+                'href'  => admin_url( '/post.php?post=' . $link . '&action=edit'),
+                'parent' => $page->ID . 'wppg',
+                'meta'  => array( 'class' => 'edit_wp_pg_group' )
+              );
+              $wp_admin_bar->add_node( $args );
+         }
+
   }
 }
 }
