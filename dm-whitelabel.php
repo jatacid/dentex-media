@@ -80,6 +80,17 @@ add_action( 'wp_before_admin_bar_render', 'my_admin_bar_edit', 99999);
 
 
 
+//Add custom CSS shortcut to adminbar
+add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 999 );
+function toolbar_css_shortcut( $wp_admin_bar ) {
+  $args = array(
+    'id'    => 'css_shortcut',
+    'title' => 'Shortcut to CSS',
+    'href'  => admin_url( 'customize.php?autofocus[control]=fl-css-code' ),
+    'meta'  => array( 'class' => 'my-toolbar-page' )
+  );
+  $wp_admin_bar->add_node( $args );
+}
 
 
 function filter_admin_menues() {
@@ -87,7 +98,6 @@ function filter_admin_menues() {
 if (current_user_can( 'administrator')){ 
 return;
 }
-
 
 
 //Remove main menus
