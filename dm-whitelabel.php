@@ -88,7 +88,7 @@ function toolbar_css_shortcut( $wp_admin_bar ) {
 if (current_user_can( 'administrator')){ 
   $args = array(
     'id'    => 'css_shortcut',
-    'title' => 'Shortcut to CSS',
+    'title' => 'CSS Shortcut',
     'href'  => admin_url( 'customize.php?autofocus[control]=fl-css-code' ),
     'meta'  => array( 'class' => 'my-toolbar-page' )
   );
@@ -168,7 +168,7 @@ function edit_wp_pg( $wp_admin_bar ) {
 if (current_user_can( 'administrator')){ 
   $args = array(
     'id'    => 'edit_wp_pg',
-    'title' => 'Edit Pages in WP',
+    'title' => 'Edit Page in WP',
     'href'  => admin_url( '/edit.php?post_type=page'), 
     'meta'  => array( 'class' => 'edit_wp_pg_group' )
   );
@@ -204,6 +204,60 @@ if (current_user_can( 'administrator')){
   }
 }
 }
+
+
+//Add navigation wp pages to shortcut to all pages to adminbar
+//Add custom bbedit-pages shortcut to adminbar
+add_action( 'admin_bar_menu', 'view_bb_pg', 996 );
+function view_bb_pg( $wp_admin_bar ) {
+
+if (current_user_can( 'administrator')){ 
+  $args = array(
+    'id'    => 'view_bb_pg',
+    'title' => 'View Page',
+    'href'  =>  '',
+    'meta'  => array( 'class' => 'view_bb_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+
+ $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
+  foreach ( $pages as $page ) {
+  $link = get_page_link( $page->ID );
+  $title = $page->post_title;
+  $args = array(
+    'id'    => $page->ID . 'vpg',
+    'title' => $title,
+    'href'  => $link,
+    'parent' => 'view_bb_pg',
+    'meta'  => array( 'class' => 'view_bb_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+  
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
+         foreach( $subpages as $subpage ) {    
+            $link = get_page_link( $subpage->ID );
+            $title = $subpage->post_title;
+            $args = array(
+                'id'    => $subpage->ID. 'vpg',
+                'title' => $title,
+                'href'  => $link,
+                'parent' => $page->ID . 'vpg',
+                'meta'  => array( 'class' => 'view_bb_pg_group' )
+              );
+              $wp_admin_bar->add_node( $args );
+         }
+  }
+}
+}
+
+
+
+
+
+
+
+
+
 
 
 
