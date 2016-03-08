@@ -82,14 +82,18 @@ add_action( 'wp_before_admin_bar_render', 'my_admin_bar_edit', 99999);
 
 
 //Add custom CSS shortcut to adminbar
-add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 998 );
+add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 997 );
 function toolbar_css_shortcut( $wp_admin_bar ) {
- 
+
+$str = "customize.php?autofocus[control]=fl-css-code";
+$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$url = admin_url();
+
 if (current_user_can( 'administrator')){ 
   $args = array(
     'id'    => 'css_shortcut',
     'title' => 'CSS Shortcut',
-    'href'  => admin_url( 'customize.php?autofocus[control]=fl-css-code' ),
+    'href'  => $url . $str . '&url=' . $ur ,
     'meta'  => array( 'class' => 'my-toolbar-page' )
   );
   $wp_admin_bar->add_node( $args );
@@ -162,17 +166,31 @@ if ($pos === false){
 
 
 //Add custom wp edit-pages shortcut to adminbar
-add_action( 'admin_bar_menu', 'edit_wp_pg', 997 );
+add_action( 'admin_bar_menu', 'edit_wp_pg', 998 );
 function edit_wp_pg( $wp_admin_bar ) {
- 
+
 if (current_user_can( 'administrator')){ 
+
+$id = get_the_ID();
+
   $args = array(
     'id'    => 'edit_wp_pg',
     'title' => 'Edit Page in WP',
-    'href'  => admin_url( '/edit.php?post_type=page'), 
+    'href'  => admin_url( '/post.php?post=' . $id . '&action=edit'), 
     'meta'  => array( 'class' => 'edit_wp_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
+
+  $args = array(
+    'id'    => 'viewedit_wp_pg',
+    'title' => 'View ALL Pages in Backend',
+    'href'  => admin_url( '/edit.php?post_type=page'),
+    'parent' => 'edit_wp_pg',
+    'meta'  => array( 'class' => 'edit_wp_pg_group' )
+  );
+  $wp_admin_bar->add_node( $args );
+
+
 
   $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
   foreach ( $pages as $page ) {
