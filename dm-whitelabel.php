@@ -117,7 +117,8 @@ function edit_bb_pg( $wp_admin_bar ) {
 if (current_user_can( 'administrator')){ 
 
 
-$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$ur = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+//$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $pos = strpos($ur, 'admin');
 if ($pos === false){
   $ur = $ur . '?fl_builder';
