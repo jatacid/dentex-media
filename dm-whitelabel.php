@@ -1,4 +1,15 @@
 <?php
+function replace_admin_menu_icon() {
+echo '<style type="text/css">
+#adminmenu .toplevel_page_beaverlodge_modules img{
+  display: none;}
+#adminmenu .toplevel_page_beaverlodge_modules .wp-menu-image:before {content: "\f111";}
+  </style>';
+}
+add_action( 'admin_head', 'replace_admin_menu_icon' );
+
+
+
 
 
 function remove_dashboard_meta() {
@@ -14,11 +25,6 @@ remove_meta_box('dashboard_activity', 'dashboard', 'normal'); //Removes the 'Act
 }
 add_action('admin_init', 'remove_dashboard_meta');
 
-
-add_filter('admin_footer_text', 'modify_footer_admin');
-function modify_footer_admin () {
-  echo 'Created by <a href="http://www.dentexmedia.com.au/">Dentex Media</a>';
-}
 
 function dm_dashboard_widget() {
 // Display whatever it is you want to show
@@ -41,11 +47,23 @@ remove_action( 'admin_notices', 'update_nag', 3 );
 
 function new_login_styles() {
   echo '<style type="text/css">
-  h1 a {background-image: none !important;}
+  h1 {
+    background-image: url("http://www.dentexmedia.com.au/wp-content/uploads/DentexMedia-logo.png") !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100px;
+
+}
+
+  h1 a {display:  none !important;}
   body {background-color: white;}
 </style>';
 }
 add_action('login_head','new_login_styles');
+
+
+
 
 
 
@@ -285,6 +303,7 @@ if (current_user_can( 'administrator')){
 
 function filter_admin_menues() {
 // If administrator then do nothing & exit this function, otherwise hide all the menu options
+
 if (current_user_can( 'administrator')){ 
 return;
 }
@@ -304,7 +323,7 @@ return;
 'profile.php',//Users
 //'tools.php', //Tools
 'revslider.php',//Users
-'wp-statistics/wp-statistics.php' //wp-statistics
+'wps_overview_page' //wp-statistics
 //'wpcf7', //ContactForm
 //'wpseo_dashboard'
 );
@@ -334,3 +353,23 @@ remove_submenu_page('index.php', 'update-core.php');
 // Filter admin side navigation menues
 add_action('admin_init','filter_admin_menues');
 
+
+/*testing a way to export all menu items to create a dynamic white label plugin 
+
+add_action( 'admin_init', 'admin_page_items' );
+
+function admin_page_items() {
+
+global $menu;
+
+echo '<div style="float: right; max-width:  800px;">';
+
+foreach ($menu as $key => $value) {
+ echo $value[0];
+ echo '<br>';
+}
+
+echo'</div>';
+}
+
+*/
