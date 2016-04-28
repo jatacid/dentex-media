@@ -44,7 +44,6 @@ add_action( 'customize_register', 'dentex_register_theme_customizer' );
 
 
 
-
 function insert_custom_template() {
 $settings =  FLCustomizer::get_mods();
 $template = $settings['dentex_header_template'];

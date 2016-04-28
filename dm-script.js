@@ -23,4 +23,3 @@ jQuery('.wpsm-show, .wpsm-hide').removeClass('wpsm-content-hide')
 
 
 
-

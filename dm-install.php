@@ -15,6 +15,7 @@ if ($defaultPage) {
 }
 
 
+
 if(get_page_by_title('Home')) {
 }
 else {

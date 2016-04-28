@@ -1,11 +1,6 @@
 <?php
 
 
-
-
-
-
-
 //[show_more more="your text" less="your text" color="#0066CC" list="»"] Your hidden Content [/show_more]
 
 add_shortcode( 'show_more', 'wpsm');
@@ -27,10 +22,6 @@ function wpsm( $attr, $smcontent ) {
 }
 
 
-
-
-
-
 add_shortcode ('wp_login_form', 'clw_shortcode');
 function clw_shortcode ($attr, $content)
 {
@@ -38,6 +29,8 @@ function clw_shortcode ($attr, $content)
   clw_form ('clw_shortcode');
   return ob_get_clean ();
 }
+
+
 
 add_action ('clw_form', 'clw_form');
 function clw_form ($form_id)
@@ -51,11 +44,11 @@ function clw_form ($form_id)
     <p>You're all logged in! </br></br>
     Head over to your account at: <a href="<?php echo get_option('home'); ?>/my-account"><em>My Account</em></a></p>
     
-  <?
+  <?php
   } else { ?>
     <h1>Login</h1>
     <a href="<?php echo get_option('home'); ?>/wp-login.php?action=lostpassword">Recover password</a> | <a href="<?php echo get_option('home'); ?>/register">Create an Account</a>
-<?
+<?php
  $args = array(
         'echo'           => true,
          'form_id' => 'loginform',
@@ -72,6 +65,6 @@ function clw_form ($form_id)
         'remember'       => true
 );
  wp_login_form( $args );
-  } 
-} 
+}
+}
 ?>

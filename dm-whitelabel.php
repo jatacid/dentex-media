@@ -10,8 +10,6 @@ add_action( 'admin_head', 'replace_admin_menu_icon' );
 
 
 
-
-
 function remove_dashboard_meta() {
 remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal'); //Removes the 'incoming links' widget
 remove_meta_box('dashboard_plugins', 'dashboard', 'normal'); //Removes the 'plugins' widget
@@ -24,6 +22,7 @@ remove_meta_box('dashboard_right_now', 'dashboard', 'normal'); //Removes the 'At
 remove_meta_box('dashboard_activity', 'dashboard', 'normal'); //Removes the 'Activity' widget (since 3.8)
 }
 add_action('admin_init', 'remove_dashboard_meta');
+
 
 
 function dm_dashboard_widget() {
@@ -48,7 +47,6 @@ remove_action( 'admin_notices', 'update_nag', 3 );
 function new_login_styles() {
   echo '<style type="text/css">
   h1 {
-    background-image: url("http://www.dentexmedia.com.au/wp-content/uploads/DentexMedia-logo.png") !important;
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
@@ -61,9 +59,6 @@ function new_login_styles() {
 </style>';
 }
 add_action('login_head','new_login_styles');
-
-
-
 
 
 
@@ -303,8 +298,8 @@ if (current_user_can( 'administrator')){
 
 function filter_admin_menues() {
 // If administrator then do nothing & exit this function, otherwise hide all the menu options
-
 if (current_user_can( 'administrator')){ 
+
 return;
 }
 
@@ -354,7 +349,9 @@ remove_submenu_page('index.php', 'update-core.php');
 add_action('admin_init','filter_admin_menues');
 
 
-/*testing a way to export all menu items to create a dynamic white label plugin 
+/* testing a way to export all menu items to create a dynamic white label plugin */
+
+/* 
 
 add_action( 'admin_init', 'admin_page_items' );
 
@@ -371,5 +368,4 @@ foreach ($menu as $key => $value) {
 
 echo'</div>';
 }
-
 */

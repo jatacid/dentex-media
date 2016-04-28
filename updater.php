@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) || class_exists( 'WPGitHubUpdater' ) || class_exists
 class WP_GitHub_Updater {
 
 	/**
-	 * GitHub Updater version
+	 * GitHub Updater version 
 	 */
 	const VERSION = 1.6;
 

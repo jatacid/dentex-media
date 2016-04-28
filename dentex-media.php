@@ -4,9 +4,18 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 2.6
+Version: 2.7
 Author URI: http://www.dentexmedia.com.au
 */
+
+
+//checks for BB-theme
+//$theme = wp_get_theme();
+//if ('bb-theme' == $theme->name || 'Beaver Builder Theme' == $theme->parent_theme) {}
+
+// Checks for BB-plugin
+//if ( class_exists( 'FLBuilder' ) ) {}
+
 
 
 //checks for BB-theme
@@ -48,7 +57,6 @@ $login = 'jatacid/dentex-media';
 }
 }
 add_action( 'init', 'dentex_media_updater' );
-
 
 
 
