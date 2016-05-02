@@ -1,14 +1,4 @@
 <?php
-function replace_admin_menu_icon() {
-echo '<style type="text/css">
-#adminmenu .toplevel_page_beaverlodge_modules img{
-  display: none;}
-#adminmenu .toplevel_page_beaverlodge_modules .wp-menu-image:before {content: "\f111";}
-  </style>';
-}
-add_action( 'admin_head', 'replace_admin_menu_icon' );
-
-
 
 function remove_dashboard_meta() {
 remove_meta_box('dashboard_incoming_links', 'dashboard', 'normal'); //Removes the 'incoming links' widget
@@ -102,7 +92,7 @@ $str = "customize.php?autofocus[control]=fl-css-code";
 $ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $url = admin_url();
 
-if (current_user_can( 'administrator')){ 
+if (current_user_can( 'administrator')){
   $args = array(
     'id'    => 'css_shortcut',
     'title' => 'CSS Shortcut',
@@ -127,12 +117,12 @@ if (current_user_can( 'administrator')){
 add_action( 'admin_bar_menu', 'edit_bb_pg', 999 );
 function edit_bb_pg( $wp_admin_bar ) {
 
-if (current_user_can( 'administrator')){ 
+if (current_user_can( 'administrator')){
 
 
 $ur = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 //$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$pos = strpos($ur, 'admin');
+$pos = strpos($ur, 'wp-admin');
 if ($pos === false){
   $ur = $ur . '?fl_builder';
 }else{
@@ -148,7 +138,7 @@ if ($pos === false){
   );
   $wp_admin_bar->add_node( $args );
 
- $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
+ $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order'));
   foreach ( $pages as $page ) {
   $link = get_page_link( $page->ID );
   $title = $page->post_title;
@@ -160,9 +150,9 @@ if ($pos === false){
     'meta'  => array( 'class' => 'edit_bb_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
-  
-      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
-         foreach( $subpages as $subpage ) {    
+
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order'));
+         foreach( $subpages as $subpage ) {
             $link = get_page_link( $subpage->ID );
             $title = $subpage->post_title;
             $args = array(
@@ -183,14 +173,14 @@ if ($pos === false){
 add_action( 'admin_bar_menu', 'edit_wp_pg', 998 );
 function edit_wp_pg( $wp_admin_bar ) {
 
-if (current_user_can( 'administrator')){ 
+if (current_user_can( 'administrator')){
 
 $id = get_the_ID();
 
   $args = array(
     'id'    => 'edit_wp_pg',
     'title' => 'Edit Page in WP',
-    'href'  => admin_url( '/post.php?post=' . $id . '&action=edit'), 
+    'href'  => admin_url( '/post.php?post=' . $id . '&action=edit'),
     'meta'  => array( 'class' => 'edit_wp_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
@@ -206,7 +196,7 @@ $id = get_the_ID();
 
 
 
-  $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
+  $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order'));
   foreach ( $pages as $page ) {
   $link = $page->ID;
   $title = $page->post_title;
@@ -218,9 +208,9 @@ $id = get_the_ID();
     'meta'  => array( 'class' => 'edit_wp_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
-  
-      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
-         foreach( $subpages as $subpage ) {    
+
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order'));
+         foreach( $subpages as $subpage ) {
             $link = $subpage->ID;
             $title = $subpage->post_title;
             $args = array(
@@ -243,7 +233,7 @@ $id = get_the_ID();
 add_action( 'admin_bar_menu', 'view_bb_pg', 996 );
 function view_bb_pg( $wp_admin_bar ) {
 
-if (current_user_can( 'administrator')){ 
+if (current_user_can( 'administrator')){
   $args = array(
     'id'    => 'view_bb_pg',
     'title' => 'View Page',
@@ -252,7 +242,7 @@ if (current_user_can( 'administrator')){
   );
   $wp_admin_bar->add_node( $args );
 
- $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order')); 
+ $pages = get_pages(array( 'parent' => '0', 'sort_column' => 'menu_order'));
   foreach ( $pages as $page ) {
   $link = get_page_link( $page->ID );
   $title = $page->post_title;
@@ -264,9 +254,9 @@ if (current_user_can( 'administrator')){
     'meta'  => array( 'class' => 'view_bb_pg_group' )
   );
   $wp_admin_bar->add_node( $args );
-  
-      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order')); 
-         foreach( $subpages as $subpage ) {    
+
+      $subpages = get_pages( array( 'child_of' => $page->ID, 'sort_column' => 'menu_order'));
+         foreach( $subpages as $subpage ) {
             $link = get_page_link( $subpage->ID );
             $title = $subpage->post_title;
             $args = array(
@@ -298,7 +288,7 @@ if (current_user_can( 'administrator')){
 
 function filter_admin_menues() {
 // If administrator then do nothing & exit this function, otherwise hide all the menu options
-if (current_user_can( 'administrator')){ 
+if (current_user_can( 'administrator')){
 
 return;
 }
@@ -326,9 +316,9 @@ return;
 // Remove sub menus
  $sub_menus_to_stay = array(
 // Dashboard
-  'index.php' => ['index.php'],
+  'index.php' => 'index.php',
 // Edit
-  'edit.php' => ['edit.php', 'post-new.php']
+  'edit.php' => 'edit.php', 'post-new.php'
   );
 
  if (isset($GLOBALS['menu']) && is_array($GLOBALS['menu'])) {
@@ -351,7 +341,7 @@ add_action('admin_init','filter_admin_menues');
 
 /* testing a way to export all menu items to create a dynamic white label plugin */
 
-/* 
+/*
 
 add_action( 'admin_init', 'admin_page_items' );
 

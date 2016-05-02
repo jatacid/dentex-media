@@ -4,7 +4,7 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 2.7
+Version: 2.8
 Author URI: http://www.dentexmedia.com.au
 */
 
@@ -94,7 +94,7 @@ require_once 'dm-environment.php';
 // Load installer
 require_once 'dm-install.php';
 
-// Load shorcodes settings 
+// Load shorcodes settings
 require_once 'dm-shortcodes.php';
 
 // Load white-labelling
