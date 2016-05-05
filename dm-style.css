@@ -12,22 +12,5 @@
     text-decoration: underline;
 }
 
-.wpsm-hide a,
-.wpsm-hide:active,
-.wpsm-hide:visited {
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.wpsm-hide:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.wpsm-content-hide {
-    display: none;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
+.wpsm-content{
+display: inline;}
