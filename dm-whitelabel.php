@@ -70,7 +70,7 @@ add_action( 'wp_before_admin_bar_render', 'my_admin_bar_edit', 99);
 
 
 //Add custom CSS shortcut to adminbar
-add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 997 );
+add_action( 'admin_bar_menu', 'toolbar_css_shortcut', 996 );
 function toolbar_css_shortcut( $wp_admin_bar ) {
 
 	$str = "customize.php?autofocus[control]=fl-css-code";
