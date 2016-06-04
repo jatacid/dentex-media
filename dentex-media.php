@@ -4,24 +4,9 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 2.9
+Version: 3.0
 Author URI: https://www.dentexmedia.com.au
 */
-
-
-//checks for BB-theme
-//$theme = wp_get_theme();
-//if ('bb-theme' == $theme->name || 'Beaver Builder Theme' == $theme->parent_theme) {}
-
-// Checks for BB-plugin
-//if ( class_exists( 'FLBuilder' ) ) {}
-
-
-
-//checks for BB-theme
-$theme = wp_get_theme();
-if ('bb-theme' == $theme->name || 'Beaver Builder Theme' == $theme->parent_theme) {
-
 
 
 //Updater Class
@@ -63,9 +48,8 @@ add_action( 'init', 'dentex_media_updater' );
 
 
 //Enqueue custom styles & css
-add_action('fl_head','dm_head');
-function dm_head(){ ?>
-<?php
+
+function dm_head(){
   $plugin_url = plugins_url( '/', __FILE__ );
   wp_enqueue_style (
     'dm-style',
@@ -79,14 +63,9 @@ function dm_head(){ ?>
     true
   );
 }
+add_action('fl_head','dm_head');
 
 
-
-
-
-
-// Load customizer settings (adds a custom part to the customizer)
-require_once 'dm-customizer.php';
 
 // Load environment (ensures certain settings remain on at all times)
 require_once 'dm-environment.php';
@@ -102,10 +81,10 @@ require_once 'dm-whitelabel.php';
 
 
 
+define('FL_MODULE_LAYOUT_DIR', plugin_dir_path(__FILE__) . '/modules/bb-layout-master');
+define('FL_MODULE_LAYOUT_URL', plugins_url('/', __FILE__) . '/modules/bb-layout-master');
 
-
-
-}
-
+// Load Beaver Modules
+require_once 'dm-bbmodules.php';
 
 

@@ -15,44 +15,75 @@ function wpsm( $attr, $smcontent ) {
 }
 
 
+//[get_param urlparam="site" default="J7Digital"]
+add_shortcode( 'get_param', 'get_url_param');
+function get_url_param( $attr, $smcontent ) {
+	$urlparam = $attr['urlparam'];
+	if (filter_input(INPUT_GET,$urlparam,FILTER_SANITIZE_STRING)) {
+		$urlparam = filter_input(INPUT_GET,$urlparam,FILTER_SANITIZE_STRING);
+		return $urlparam;
+	}else{
+		return $attr['default'];
+	}
+}
+
+
+//[wp_login_form lostpasswordurl="/wp-login.php?action=lostpassword" newaccounturl="/wp-login.php?action=register" redirect="blog"]
 add_shortcode ('wp_login_form', 'clw_shortcode');
 function clw_shortcode ($attr, $content)
 {
 	ob_start ();
-	clw_form ('clw_shortcode');
+	clw_form ($attr);
 	return ob_get_clean ();
 }
-add_action ('clw_form', 'clw_form');
-function clw_form ($form_id){
+
+function clw_form ($attr){
 
 	if ( is_user_logged_in() ) { ?>
-	<?php $current_user = wp_get_current_user(); ?>
-	<h1>Hello <?php echo $current_user->display_name ?></h1>
+		<?php $current_user = wp_get_current_user(); ?>
+		<h1>Hello <?php echo $current_user->display_name ?></h1>
 
-</br>
-<p>You're all logged in! </br></br>
-	Head over to your account at: <a href="<?php echo get_option('home'); ?>/my-account"><em>My Account</em></a></p>
+	</br>
+	<p>You're all logged in!</p>
 
 	<?php
-} else { ?>
-<h1>Login</h1>
-<a href="<?php echo get_option('home'); ?>/wp-login.php?action=lostpassword">Recover password</a> | <a href="<?php echo get_option('home'); ?>/wp-login.php?action=register">Create an Account</a>
-<?php
-$args = array(
-	'echo'           => true,
-	'form_id' => 'loginform',
-	'redirect' => site_url( '/home/ '),
-	'label_username' => __( 'Username' ),
-	'label_password' => __( 'Password' ),
-	'label_remember' => __( 'Remember Me' ),
-	'label_log_in'   => __( 'Log In' ),
-	'id_username'    => 'user_login',
-	'id_password'    => 'user_pass',
-	'id_remember'    => 'rememberme',
-	'id_submit'      => 'wp-submit',
-	'value_remember' => true,
-	'remember'       => true
-	);
-wp_login_form( $args );
+} else {
+
+
+	if (!isset($attr['lostpasswordurl'])){
+		$attr['lostpasswordurl'] = 'wp-login.php?action=lostpassword';
+	}
+	if (!isset($attr['newaccounturl'])){
+		$attr['newaccounturl'] = 'wp-login.php?action=register';
+	}
+	if (!isset($attr['redirect'])){
+		$attr['redirect'] = home_url();
+	} else {
+		$attr['redirect'] = home_url($attr['redirect']);
+		$redirect = $attr['redirect'];
+	}
+
+	echo '<a href="' . get_option('home') . '/' .$attr['lostpasswordurl'] . '">Recover Password </a>';
+	echo ' | ';
+	echo '<a href="' . get_option('home') . '/' . $attr['newaccounturl'] . '">Register an Account</a>';
+
+
+	$args = array(
+		'echo'           => true,
+		'form_id' => 'loginform',
+		'label_username' => __( 'Username' ),
+		'label_password' => __( 'Password' ),
+		'label_remember' => __( 'Remember Me' ),
+		'label_log_in'   => __( 'Log In' ),
+		'id_username'    => 'user_login',
+		'id_password'    => 'user_pass',
+		'id_remember'    => 'rememberme',
+		'id_submit'      => 'wp-submit',
+		'value_remember' => TRUE,
+		'remember'       => TRUE,
+		'redirect'		=> $redirect
+		);
+	wp_login_form( $args );
 }
+
 }
