@@ -4,7 +4,7 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 3.1
+Version: 3.2
 Author URI: https://www.dentexmedia.com.au
 */
 
@@ -50,20 +50,15 @@ add_action( 'init', 'dentex_media_updater' );
 //Enqueue custom styles & css
 
 function dm_head(){
+	global $plugin_url;
   $plugin_url = plugins_url( '/', __FILE__ );
-  wp_enqueue_style (
-    'dm-style',
-    $plugin_url . 'dm-style.css'
-  );
-  wp_enqueue_script (
-    'dm-script',
-    $plugin_url . 'dm-script.js',
-    array( 'jquery' ),
-    '1.0.1',
-    true
-  );
+  wp_enqueue_style ('dm-style', $plugin_url . 'dm-style.css');
+  wp_enqueue_script ('dm-script',$plugin_url . 'dm-script.js', array( 'jquery' ),'1.0.1', true );
+
+
+
 }
-add_action('fl_head','dm_head');
+add_action('wp_enqueue_scripts','dm_head');
 
 
 
@@ -78,3 +73,13 @@ require_once 'dm-shortcodes.php';
 
 // Load white-labelling
 require_once 'dm-whitelabel.php';
+
+// Load Beaver Builder Stuff
+  if ( class_exists( 'FLBuilder' ) ) {
+define( 'BBLIVEPREVIEW_VERSION' , '1.1.8' );
+define( 'BBLIVEPREVIEW_DIR', plugin_dir_path( __FILE__ ) );
+define( 'BBLIVEPREVIEW_URL', plugins_url( '/', __FILE__ ) );
+
+       require_once ( 'livepreview/livepreview.php' );
+
+  }
