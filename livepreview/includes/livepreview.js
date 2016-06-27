@@ -18,6 +18,10 @@
 				$('.fl-col-highlight .fl-col-content').prop('style', 'border-width: 0px;');
 
 
+
+				$( 'html' ).removeClass('fl-builder-edit');
+				$( '#wpadminbar' ).css('display','none');
+
 				$('.bblivepreview').css('background-color', '#ff3535');
 
 			} else {
@@ -33,6 +37,9 @@
 				// enable highlights
 				$('.fl-col-highlight .fl-col-content').prop('style', '');
 
+
+				$( 'html' ).addClass('fl-builder-edit');
+			$( '#wpadminbar' ).css('display','block');
 			$('.bblivepreview').css('background-color', 'transparent');
 
 			}
