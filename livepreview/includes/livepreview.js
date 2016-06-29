@@ -84,18 +84,49 @@
 
 		}
 
+
+		/**
+		 * Save the layout to Wordpress
+		 * @uses  _savedone
+		 * @return void
+		 */
+		_css_shortcut = function () {
+
+
+	//$str = "/wp-admin/customize.php?autofocus[control]=fl-css-code";
+	//$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+	var currenturl = window.location.href.split('?')[0];
+	$url = window.location.protocol + '//' + window.location.hostname + '/web/wp-admin/customize.php?autofocus[control]=fl-css-code&url="' + currenturl + '"';
+
+
+
+
+		window.open($url, '_blank');
+
+		}
+
+
 		// Make sure the FLBuilderModel exists before calling anything
 		if ( typeof FLBuilderModel != undefined ) {
 			// init state for fullview
 			var isfullview = false;
 
-
 			$.bbAddPanel({
 				location: 'bar',
-				html: 'Page CSS' ,
+				html: 'Pg CSS' ,
 				style: 'button',
 				class: 'custom-layout-settings'
 			});
+
+			$.bbAddPanel({
+				location: 'bar',
+				html: 'CSS',
+				style: 'button',
+				class:'css-shortcut'
+			});
+
+
 
 			$.bbAddPanel({
 				location: 'bar',
@@ -117,6 +148,9 @@
 			// Add the delegates
 			$('body').delegate('.bblivepreview', 'click', toggle_livepreview );
 			$('body').delegate('.fl-builder-quicksave-button' , 'click' , _Quicksave );
+
+			$('body').delegate('.css-shortcut' , 'click' , _css_shortcut );
+
 			$('body').delegate('.custom-layout-settings', 'click', FLBuilder._layoutSettingsClicked );
 
 //			$('body').delegate('.custom-layout-settings', 'click', FLBuilder._globalSettingsClicked);

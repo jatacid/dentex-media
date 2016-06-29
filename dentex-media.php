@@ -4,7 +4,7 @@ Plugin Name: Dentex Media Plugin
 Plugin URI: https://www.dentexmedia.com.au
 Description: A plugin for setting up wordpress environment to ideal conditions.
 Author: Dentex Media
-Version: 3.2
+Version: 3.3
 Author URI: https://www.dentexmedia.com.au
 */
 
@@ -12,7 +12,7 @@ Author URI: https://www.dentexmedia.com.au
 //Updater Class
 if (!function_exists( 'github_plugin_updater_test_init' )) {
 function github_plugin_updater_test_init() {
-// ... proceed to declare your function
+
 include_once 'updater.php';
 define( 'WP_GITHUB_FORCE_UPDATE', true );
 }
@@ -52,13 +52,13 @@ add_action( 'init', 'dentex_media_updater' );
 function dm_head(){
 	global $plugin_url;
   $plugin_url = plugins_url( '/', __FILE__ );
-  wp_enqueue_style ('dm-style', $plugin_url . 'dm-style.css');
-  wp_enqueue_script ('dm-script',$plugin_url . 'dm-script.js', array( 'jquery' ),'1.0.1', true );
+  //wp_enqueue_style ('dm-style', $plugin_url . 'dm-style.css');
+  //wp_enqueue_script ('dm-script',$plugin_url . 'dm-script.js', array( 'jquery' ),'1.0.1', true );
 
 
 
 }
-add_action('wp_enqueue_scripts','dm_head');
+//add_action('wp_enqueue_scripts','dm_head');
 
 
 

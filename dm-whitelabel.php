@@ -94,6 +94,33 @@ function toolbar_css_shortcut( $wp_admin_bar ) {
 			'parent' => 'site-name'
 			);
 		$wp_admin_bar->add_node( $args );
+
+
+		$args = array(
+			'id'    => 'addpluginshortcut',
+			'title' => 'Add Plugins',
+			'href'  => admin_url( 'plugin-install.php?tab=upload' ),
+			'parent' => 'site-name'
+			);
+		$wp_admin_bar->add_node( $args );
+
+		$args = array(
+			'id'    => 'mediashortcut',
+			'title' => 'View Media',
+			'href'  => admin_url( 'upload.php' ),
+			'parent' => 'site-name'
+			);
+		$wp_admin_bar->add_node( $args );
+
+		$args = array(
+			'id'    => 'forceupdate',
+			'title' => 'Check Updates',
+			'href'  => admin_url( 'update-core.php?force-check=1' ),
+			'parent' => 'site-name'
+			);
+		$wp_admin_bar->add_node( $args );
+
+
 	}
 }
 
