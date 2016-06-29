@@ -97,7 +97,7 @@
 	//$ur = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 	var currenturl = window.location.href.split('?')[0];
-	$url = window.location.protocol + '//' + window.location.hostname + '/web/wp-admin/customize.php?autofocus[control]=fl-css-code&url="' + currenturl + '"';
+	$url = window.location.protocol + '//' + window.location.hostname + '/wp-admin/customize.php?autofocus[control]=fl-css-code&url="' + currenturl + '"';
 
 
 
