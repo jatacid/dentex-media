@@ -20,12 +20,14 @@ if(get_page_by_title('Home')) {
 }
 else {
   global $wpdb;
+  global $now;
+  global $now_gmt;
 // First Page
-  $first_page = get_site_option( 'first_page', $first_page );
+
   $first_post_guid = get_option('home') . '/?page_id=1';
   $wpdb->insert( $wpdb->posts, array(
-    'post_date' => $now,
-    'post_date_gmt' => $now_gmt,
+    'post_date' => '',
+    'post_date_gmt' => '' ,
     'post_content' => '',
     'post_excerpt' => '',
     'post_title' => __( 'Home' ),
@@ -33,8 +35,8 @@ else {
 
     /* translators: Default page slug */
     'post_name' => __( 'home' ),
-    'post_modified' => $now,
-    'post_modified_gmt' => $now_gmt,
+    'post_modified' => '',
+    'post_modified_gmt' => '',
     'guid' => $first_post_guid,
     'post_type' => 'page',
     'to_ping' => '',

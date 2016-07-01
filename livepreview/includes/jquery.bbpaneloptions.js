@@ -29,7 +29,8 @@
 		        } else if ( settings.location == 'bar' ) {
 
 		        	// if target not set in options base it on location
-		        	if ( !settings.target ) settings.target = 'div.fl-builder-bar-actions span:nth-last-of-type(2)';
+		        	//if ( !settings.target ) settings.target = 'div.fl-builder-bar-actions span:nth-last-of-type(2)';
+		        	if ( !settings.target ) settings.target = 'span.fl-builder-bar-title span:nth-last-of-type(1)';
 		        	// reset position to insert after
 		        	settings.position = 'insertafter';
 		        }

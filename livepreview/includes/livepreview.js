@@ -17,9 +17,10 @@
 				// remove any remaining highlights
 				$('.fl-col-highlight .fl-col-content').prop('style', 'border-width: 0px;');
 
+				$( 'html.fl-builder-edit .shape-borders-wrapper' ).css('position', 'absolute');
+				$( 'html.fl-builder-edit .shape-borders-wrapper' ).css('opacity', '1.0');
 
 
-				$( 'html' ).removeClass('fl-builder-edit');
 				$( '#wpadminbar' ).css('display','none');
 
 				$('.bblivepreview').css('background-color', '#ff3535');
@@ -29,7 +30,7 @@
 				FLBuilder._bindOverlayEvents();
 
 				// show the bar
-			$('.fl-builder-bar-content').css('opacity' , '1.0');
+				$('.fl-builder-bar-content').css('opacity' , '1.0');
 
 				// reenable the top margin
 				$('html.fl-builder-edit').prop('style' , '' );
@@ -37,10 +38,11 @@
 				// enable highlights
 				$('.fl-col-highlight .fl-col-content').prop('style', '');
 
+				$( 'html.fl-builder-edit .shape-borders-wrapper' ).css('position', 'relative');
+				$( 'html.fl-builder-edit .shape-borders-wrapper' ).css('opacity', '0.4');
 
-				$( 'html' ).addClass('fl-builder-edit');
-			$( '#wpadminbar' ).css('display','block');
-			$('.bblivepreview').css('background-color', 'transparent');
+				$( '#wpadminbar' ).css('display','block');
+				$('.bblivepreview').css('background-color', 'transparent');
 
 			}
 
@@ -57,7 +59,7 @@
 		 * @uses  _savereset
 		 * @return void
 		 */
-		_savedone = function () {
+		 _savedone = function () {
 			// add css-class to indicate save is made
 			$('.fl-builder-quicksave-button').css('background-color', '#00FF78');
 			// set timeout to remove the class
@@ -67,22 +69,22 @@
 		 * callback function for resetting the layout of the save buttons
 		 * @return void
 		 */
-		_savereset = function () {
-			$('.fl-builder-quicksave-button').css('background-color', '');
-		}
+		 _savereset = function () {
+		 	$('.fl-builder-quicksave-button').css('background-color', '');
+		 }
 
 		/**
 		 * Save the layout to Wordpress
 		 * @uses  _savedone
 		 * @return void
 		 */
-		_Quicksave = function () {
-			FLBuilder.showAjaxLoader();
-			FLBuilder.ajax({
-				action: 'save_layout'
-			}, _savedone );
+		 _Quicksave = function () {
+		 	FLBuilder.showAjaxLoader();
+		 	FLBuilder.ajax({
+		 		action: 'save_layout'
+		 	}, _savedone );
 
-		}
+		 }
 
 
 		/**
@@ -90,7 +92,7 @@
 		 * @uses  _savedone
 		 * @return void
 		 */
-		_css_shortcut = function () {
+		 _css_shortcut = function () {
 
 
 	//$str = "/wp-admin/customize.php?autofocus[control]=fl-css-code";
@@ -102,9 +104,9 @@
 
 
 
-		window.open($url, '_blank');
+	window.open($url, '_blank');
 
-		}
+}
 
 
 		// Make sure the FLBuilderModel exists before calling anything
@@ -158,8 +160,8 @@
 
 
 
-		}
-	});
+}
+});
 
 
 }) ( jQuery );
