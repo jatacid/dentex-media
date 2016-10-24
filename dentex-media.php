@@ -9,13 +9,13 @@ Author URI: https://www.dentexmedia.com.au
 */
 
 
+define( 'BRANDING', 'Advanced' );
 //Updater Class
 if (!function_exists( 'github_plugin_updater_test_init' )) {
 function github_plugin_updater_test_init() {
 
 include_once 'updater.php';
 define( 'WP_GITHUB_FORCE_UPDATE', true );
-define( 'BRANDING', 'Advanced' );
 }
 }
 add_action( 'init', 'github_plugin_updater_test_init' );
